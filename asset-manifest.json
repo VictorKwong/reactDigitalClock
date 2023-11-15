@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/VrClock/static/css/main.e6c13ad2.css",
+    "main.js": "/VrClock/static/js/main.3fd464c6.js",
+    "static/js/787.d285de39.chunk.js": "/VrClock/static/js/787.d285de39.chunk.js",
+    "static/media/bedside-clock-alarm.mp3": "/VrClock/static/media/bedside-clock-alarm.7d91df4c22b73dcff5ed.mp3",
+    "index.html": "/VrClock/index.html",
+    "main.e6c13ad2.css.map": "/VrClock/static/css/main.e6c13ad2.css.map",
+    "main.3fd464c6.js.map": "/VrClock/static/js/main.3fd464c6.js.map",
+    "787.d285de39.chunk.js.map": "/VrClock/static/js/787.d285de39.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.3fd464c6.js"
+  ]
+}
