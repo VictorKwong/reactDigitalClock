@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import alarmSound from './audio/bedside-clock-alarm.mp3';
 
+
 function Clock() {
     const [currentTime, setCurrentTime] = useState(new Date());
     const [alarmTime, setAlarmTime] = useState(new Date());
@@ -9,7 +10,12 @@ function Clock() {
     const [selectedHour, setSelectedHour] = useState(0);
     const [selectedMinute, setSelectedMinute] = useState(0);
     const [remainingTime, setRemainingTime] = useState(null);
+    const [isAlarmSetting, setIsAlarmSetting] = useState(false);
     const audioRef = useRef(new Audio(alarmSound));
+
+    const weekdaysAcronym = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const monthsAcronym = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
 
     useEffect(() => {
         const updateTime = () => {
@@ -82,6 +88,10 @@ function Clock() {
         setIsAlarmActive(false);
     }
 
+    const displayAlarm = () => {
+        setIsAlarmSetting(!isAlarmSetting);
+    }
+
     const handleHourChange = (event) => {
         setSelectedHour(parseInt(event.target.value, 10));
       };
@@ -93,8 +103,8 @@ function Clock() {
   return (
     <div>
         <div>
-            <h1>Current Time</h1>
-            <h2>Current Time: {currentTime.toLocaleTimeString()}</h2>
+            <h1>{currentTime.toLocaleTimeString()}</h1>
+            <h2>{weekdaysAcronym[currentTime.getDay()]} - {monthsAcronym[currentTime.getMonth()]} {currentTime.getDate()} {currentTime.getFullYear()}</h2>
         </div>
         <div>
             {isAlarmActive && remainingTime ? (
@@ -103,37 +113,46 @@ function Clock() {
                 </div>
             ) : (
                 <div>
-                    <p>Alarm is not active.</p>
+                    <button onClick={displayAlarm}>Set Alarm</button>
                 </div>
             )}
         </div>
-        <div>
-            <p>Alarm Time: {alarmTime.toLocaleString()}</p>
-            <label>Select Hour: </label>
-            <select value={selectedHour} onChange={handleHourChange}>
-            {[...Array(24).keys()].map((hour) => (
-                <option key={hour} value={hour}>
-                {hour === 0 ? '12' : (hour <= 12 ? `${hour}` : `${hour - 12}`)} {hour < 12 ? 'AM' : 'PM'}
-                </option>
-            ))}
-            </select>
-            <label>Select Minute: </label>
-            <select value={selectedMinute} onChange={handleMinuteChange}>
-            {[...Array(60).keys()].map((minute) => (
-                <option key={minute} value={minute}>
-                {minute}
-                </option>
-            ))}
-            </select>
-            <button onClick={handleSetAlarm}>Set Alarm</button>
-        </div>
+        { isAlarmSetting ? (
+            <div>
+                <div>
+                    <p>Alarm Time: {alarmTime.toLocaleString()}</p>
+                    <label>Select Hour: </label>
+                    <select value={selectedHour} onChange={handleHourChange}>
+                    {[...Array(24).keys()].map((hour) => (
+                        <option key={hour} value={hour} className='text-end'>
+                        {/* {hour === 0 ? '12' : (hour <= 12 ? (hour < 10 ? ` ${hour}` : `${hour}`) : (hour - 12))} {hour < 12 ? 'AM' : 'PM'} */}
+                        {hour === 0 ? 'ㅤ12' : (hour <= 12 ? `ㅤ${hour}` : `ㅤ${hour - 12}`)} {hour < 12 ? 'AM' : 'PM'}
+                        </option>
+                    ))}
+                    </select>
+                    <label>Select Minute: </label>
+                    <select value={selectedMinute} onChange={handleMinuteChange}>
+                    {[...Array(60).keys()].map((minute) => (
+                        <option key={minute} value={minute}>
+                        {minute < 10 ? `0${minute}` : `${minute}`}
+                        </option>
+                    ))}
+                    </select>
+                    <button onClick={handleSetAlarm}>Set Alarm</button>
+                </div>
 
-        <div>
-            <button onClick={playAlarm}>Test</button>
-        </div>
-        <div>
-            <button onClick={handleCloseAlarm}>Stop</button>
-        </div>
+                <div>
+                    <button onClick={playAlarm}>Test</button>
+                </div>
+                <div>
+                    <button onClick={handleCloseAlarm}>Stop</button>
+                </div>
+                <div>
+                    <button onClick={displayAlarm}>Cancel</button>
+                </div>
+            </div>
+        ) : null}
+
 
         {isAlertVisible && (
         <div className="alert-window">
