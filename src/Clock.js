@@ -120,7 +120,7 @@ function Clock() {
         { isAlarmSetting ? (
             <div>
                 <div>
-                    <p>Alarm Time: {alarmTime.toLocaleString()}</p>
+                
                     <label>Select Hour: </label>
                     <select value={selectedHour} onChange={handleHourChange}>
                     {[...Array(24).keys()].map((hour) => (
@@ -140,18 +140,20 @@ function Clock() {
                     </select>
                     <button onClick={handleSetAlarm}>Set Alarm</button>
                 </div>
+                {isAlarmActive ? <p>Alarm Time: {alarmTime.toLocaleString()}</p> : null }
 
                 <div>
                     <button onClick={playAlarm}>Test</button>
-                </div>
-                <div>
-                    <button onClick={handleCloseAlarm}>Stop</button>
                 </div>
                 <div>
                     <button onClick={displayAlarm}>Cancel</button>
                 </div>
             </div>
         ) : null}
+
+        {isAlarmActive ? (<div>
+            <button onClick={handleCloseAlarm}>Stop</button>
+        </div>) : null }
 
 
         {isAlertVisible && (
