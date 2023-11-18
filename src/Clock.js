@@ -78,6 +78,7 @@ function Clock() {
 
         setAlarmTime(newAlarmTime);
         setIsAlarmActive(true);
+        setIsAlarmSetting(false);
     }
 
     const handleCloseAlarm = () => {
@@ -109,7 +110,9 @@ function Clock() {
         <div>
             {isAlarmActive && remainingTime ? (
                 <div>
+                    <p>Alarm Time: {alarmTime.toLocaleString()}</p>
                     <p>Remaining Time: {remainingTime.hours < 10 ? "0" + remainingTime.hours : remainingTime.hours}:{remainingTime.minutes < 10 ? "0" + remainingTime.minutes : remainingTime.minutes}:{remainingTime.seconds < 10 ? "0" + remainingTime.seconds : remainingTime.seconds}</p>
+                    <button onClick={handleCloseAlarm}>Stop</button>
                 </div>
             ) : (
                 <div>
@@ -140,7 +143,7 @@ function Clock() {
                     </select>
                     <button onClick={handleSetAlarm}>Set Alarm</button>
                 </div>
-                {isAlarmActive ? <p>Alarm Time: {alarmTime.toLocaleString()}</p> : null }
+                
 
                 <div>
                     <button onClick={playAlarm}>Test</button>
@@ -150,10 +153,6 @@ function Clock() {
                 </div>
             </div>
         ) : null}
-
-        {isAlarmActive ? (<div>
-            <button onClick={handleCloseAlarm}>Stop</button>
-        </div>) : null }
 
 
         {isAlertVisible && (
