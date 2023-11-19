@@ -110,7 +110,7 @@ function Clock() {
         <div>
             {isAlarmActive && remainingTime ? (
                 <div>
-                    <p>Alarm Time: {alarmTime.toLocaleString()}</p>
+                    <p>Alarm Time: {alarmTime.getHours() <= 12 ? alarmTime.getHours() : alarmTime.getHours() - 12}:{alarmTime.getMinutes() < 10 ? "0" + alarmTime.getMinutes() : alarmTime.getMinutes()} {alarmTime.getHours() < 12 ? 'AM' : 'PM'}</p>
                     <p>Remaining Time: {remainingTime.hours < 10 ? "0" + remainingTime.hours : remainingTime.hours}:{remainingTime.minutes < 10 ? "0" + remainingTime.minutes : remainingTime.minutes}:{remainingTime.seconds < 10 ? "0" + remainingTime.seconds : remainingTime.seconds}</p>
                     <button onClick={handleCloseAlarm}>Stop</button>
                 </div>
@@ -128,7 +128,6 @@ function Clock() {
                     <select value={selectedHour} onChange={handleHourChange}>
                     {[...Array(24).keys()].map((hour) => (
                         <option key={hour} value={hour} className='text-end'>
-                        {/* {hour === 0 ? '12' : (hour <= 12 ? (hour < 10 ? ` ${hour}` : `${hour}`) : (hour - 12))} {hour < 12 ? 'AM' : 'PM'} */}
                         {hour === 0 ? 'ㅤ12' : (hour <= 12 ? `ㅤ${hour}` : `ㅤ${hour - 12}`)} {hour < 12 ? 'AM' : 'PM'}
                         </option>
                     ))}
