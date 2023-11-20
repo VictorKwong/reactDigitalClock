@@ -1,8 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import alarmSound from './audio/bedside-clock-alarm.mp3';
-
+import alarmBedSide from './audio/bedside-clock-alarm.mp3';
+import alarmSmartPhone from './audio/marimba-for-smartphone.mp3';
+import alarmRing from './audio/ringtone.mp3';
+import alarmSeatbelt from './audio/seatbelt-tone.mp3';
+import alarmNotify from './audio/simple-notification.mp3';
 
 function Clock() {
+    const weekdaysAcronym = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const monthsAcronym = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const audioSources = [
+        { id: 1, name: 'Bedside', src: alarmBedSide },
+        { id: 2, name: 'SmartPhone', src: alarmSmartPhone },
+        { id: 3, name: 'RingPhone', src: alarmRing },
+        { id: 4, name: 'SeatbeltTone', src: alarmSeatbelt },
+        { id: 5, name: 'Notification', src: alarmNotify },
+        // Add more audio sources as needed
+      ];
+
     const [currentTime, setCurrentTime] = useState(new Date());
     const [alarmTime, setAlarmTime] = useState(new Date());
     const [isAlarmActive, setIsAlarmActive] = useState(false);
@@ -11,11 +25,10 @@ function Clock() {
     const [selectedMinute, setSelectedMinute] = useState(0);
     const [remainingTime, setRemainingTime] = useState(null);
     const [isAlarmSetting, setIsAlarmSetting] = useState(false);
-    const audioRef = useRef(new Audio(alarmSound));
+    const [selectedAudio, setSelectedAudio] = useState(audioSources[0]);
+    const audioRef = useRef(new Audio(selectedAudio.src));
 
-    const weekdaysAcronym = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const monthsAcronym = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    
+
 
     useEffect(() => {
         const updateTime = () => {
@@ -93,6 +106,13 @@ function Clock() {
         setIsAlarmSetting(!isAlarmSetting);
     }
 
+    const handleAudioChange = (event) => {
+        const selectedId = parseInt(event.target.value, 10);
+        const selected = audioSources.find((audio) => audio.id === selectedId);
+        setSelectedAudio(selected);
+        audioRef.current.src = selected.src;
+      };
+
     const handleHourChange = (event) => {
         setSelectedHour(parseInt(event.target.value, 10));
       };
@@ -140,9 +160,19 @@ function Clock() {
                         </option>
                     ))}
                     </select>
+
                     <button onClick={handleSetAlarm}>Set Alarm</button>
                 </div>
-                
+<div>
+            <label>Select Audio:</label>
+                                <select value={selectedAudio.id} onChange={handleAudioChange}>
+                                    {audioSources.map((audio) => (
+                                    <option key={audio.id} value={audio.id}>
+                                        {audio.name}
+                                    </option>
+                                    ))}
+                                </select>
+</div>
 
                 <div>
                     <button onClick={playAlarm}>Test</button>
