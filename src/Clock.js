@@ -130,13 +130,13 @@ function Clock() {
         <div>
             {isAlarmActive && remainingTime ? (
                 <div>
-                    <p>Alarm Time: {alarmTime.getHours() <= 12 ? alarmTime.getHours() : alarmTime.getHours() - 12}:{alarmTime.getMinutes() < 10 ? "0" + alarmTime.getMinutes() : alarmTime.getMinutes()} {alarmTime.getHours() < 12 ? 'AM' : 'PM'}</p>
+                    <p>Alarm Time: {alarmTime.getHours() === 0 ? '12' : (alarmTime.getHours() <= 12 ? alarmTime.getHours() : alarmTime.getHours() - 12)}:{alarmTime.getMinutes() < 10 ? "0" + alarmTime.getMinutes() : alarmTime.getMinutes()} {alarmTime.getHours() < 12 ? 'AM' : 'PM'}</p>
                     <p>Remaining Time: {remainingTime.hours < 10 ? "0" + remainingTime.hours : remainingTime.hours}:{remainingTime.minutes < 10 ? "0" + remainingTime.minutes : remainingTime.minutes}:{remainingTime.seconds < 10 ? "0" + remainingTime.seconds : remainingTime.seconds}</p>
-                    <button onClick={handleCloseAlarm}>Stop</button>
+                    <button onClick={handleCloseAlarm} className='btn btn-outline-danger'>Stop Alarm</button>
                 </div>
             ) : (
                 <div>
-                    <button onClick={displayAlarm}>Set Alarm</button>
+                    <button onClick={displayAlarm} className='btn btn-outline-success'>Set Alarm</button>
                 </div>
             )}
         </div>
@@ -161,7 +161,7 @@ function Clock() {
                     ))}
                     </select>
 
-                    <button onClick={handleSetAlarm}>Set Alarm</button>
+                    <button onClick={handleSetAlarm} className='btn btn-outline-success'>Start</button>
                 </div>
 <div>
             <label>Select Audio:</label>
@@ -175,10 +175,10 @@ function Clock() {
 </div>
 
                 <div>
-                    <button onClick={playAlarm}>Test</button>
+                    <button onClick={playAlarm} className='btn btn-outline-primary'>Test</button>
                 </div>
                 <div>
-                    <button onClick={displayAlarm}>Cancel</button>
+                    <button onClick={displayAlarm} className='btn btn-outline-primary'>Cancel</button>
                 </div>
             </div>
         ) : null}
@@ -187,7 +187,7 @@ function Clock() {
         {isAlertVisible && (
         <div className="alert-window">
           <p>Alarm is ringing!</p>
-          <button onClick={closeAlert}>OK</button>
+          <button onClick={closeAlert} className='btn btn-outline-danger'>OK</button>
         </div>
         )}
     </div>

@@ -3,8 +3,7 @@ import Clock from './Clock';
 
 function App() {
   return (
-    <div>
-      <h1>My React Clock App</h1>
+    <div className='text-center Small shadow container p-4'>
       <Clock />
     </div>
   );
