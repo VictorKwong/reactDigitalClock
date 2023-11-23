@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/reactDigitalClock/static/css/main.0db7a0b2.css",
-    "main.js": "/reactDigitalClock/static/js/main.9598db84.js",
+    "main.css": "/reactDigitalClock/static/css/main.c2a47dc3.css",
+    "main.js": "/reactDigitalClock/static/js/main.5881d2f8.js",
     "static/js/787.d285de39.chunk.js": "/reactDigitalClock/static/js/787.d285de39.chunk.js",
     "static/media/ringtone.mp3": "/reactDigitalClock/static/media/ringtone.464cc45992f202d5ea62.mp3",
     "static/media/bedside-clock-alarm.mp3": "/reactDigitalClock/static/media/bedside-clock-alarm.7d91df4c22b73dcff5ed.mp3",
@@ -9,12 +9,12 @@
     "static/media/seatbelt-tone.mp3": "/reactDigitalClock/static/media/seatbelt-tone.6003b205e5fafb28c08d.mp3",
     "static/media/simple-notification.mp3": "/reactDigitalClock/static/media/simple-notification.d97faf05c26b6ff8aa03.mp3",
     "index.html": "/reactDigitalClock/index.html",
-    "main.0db7a0b2.css.map": "/reactDigitalClock/static/css/main.0db7a0b2.css.map",
-    "main.9598db84.js.map": "/reactDigitalClock/static/js/main.9598db84.js.map",
+    "main.c2a47dc3.css.map": "/reactDigitalClock/static/css/main.c2a47dc3.css.map",
+    "main.5881d2f8.js.map": "/reactDigitalClock/static/js/main.5881d2f8.js.map",
     "787.d285de39.chunk.js.map": "/reactDigitalClock/static/js/787.d285de39.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0db7a0b2.css",
-    "static/js/main.9598db84.js"
+    "static/css/main.c2a47dc3.css",
+    "static/js/main.5881d2f8.js"
   ]
 }
