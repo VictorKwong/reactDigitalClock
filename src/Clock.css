@@ -8,7 +8,7 @@
     transition: opacity 0.3s ease-in-out;
   }
   
-  .popup {
+.popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -19,6 +19,22 @@
     transition: opacity 0.3s ease-in-out;
   }
   
-  .popup-content {
+.popup-content {
     text-align: center;
   }
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #000;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: red;
+}

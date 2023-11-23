@@ -144,10 +144,11 @@ function Clock() {
         </div>
         { isAlarmSetting && !isAlertVisible ? (
                 <div>
-                    <div className="overlay"></div>
+                    <div className="overlay" onClick={displayAlarm}></div>
                         <div className="popup">
                             <div className="popup-content">
-
+                                <button onClick={displayAlarm} className="close-btn">X</button>
+                            
                                 <label>Select Hour: </label>
                                 <select value={selectedHour} onChange={handleHourChange} className='form-select'>
                                 {[...Array(24).keys()].map((hour) => (
@@ -188,10 +189,11 @@ function Clock() {
                 </div>
         ) : isAlertVisible ?
             <div>
-                <div className="overlay"></div>
+                <div className="overlay" onClick={closeAlert}></div>
                 <div className="popup">
                 <div className="popup-content">
                     <div className="alert-window">
+                        <button onClick={closeAlert} className="close-btn">X</button>
                         <p>Alarm is ringing!</p>
                         <button onClick={closeAlert} className='btn btn-outline-danger'>OK</button>
                 </div>
