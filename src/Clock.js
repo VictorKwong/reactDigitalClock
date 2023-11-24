@@ -19,6 +19,7 @@ function Clock() {
         // Add more audio sources as needed
       ];
 
+    const [isInitialRender, setIsInitialRender] = useState(true);
     const [currentTime, setCurrentTime] = useState(new Date());
     const [alarmTime, setAlarmTime] = useState(new Date());
     const [isAlarmActive, setIsAlarmActive] = useState(false);
@@ -37,7 +38,6 @@ function Clock() {
             setCurrentTime(new Date());
         }
         updateTime();
-
         const clockId = setInterval(updateTime, 1000);
 
         return () => clearInterval(clockId);
@@ -71,8 +71,6 @@ function Clock() {
         audio.pause();
         setAlertVisible(false);
         setIsAlarmActive(false);
-    
-        window.removeEventListener('beforeunload', closeAlert);
       };
 
     const handleSetAlarm = () => {
@@ -105,7 +103,9 @@ function Clock() {
     }
 
     const displayAlarm = () => {
+        setIsInitialRender(false);
         setIsAlarmSetting(!isAlarmSetting);
+
     }
 
     const handleAudioChange = (event) => {
@@ -138,13 +138,13 @@ function Clock() {
                 </div>
             ) : (
                 <div>
-                    <button onClick={displayAlarm} className='btn btn-outline-success'>Set Alarm</button>
+                    <button onClick={displayAlarm} className='btn btn-outline-success'>Set  Alarm</button>
                 </div>
             )}
         </div>
         { isAlarmSetting && !isAlertVisible ? (
-                <div>
-                    <div className="overlay" onClick={displayAlarm}></div>
+                <div>   
+                    <div className={`overlay`} onClick={displayAlarm}></div>
                         <div className="popup">
                             <div className="popup-content">
                                 <button onClick={displayAlarm} className="close-btn">X</button>
@@ -189,7 +189,7 @@ function Clock() {
                 </div>
         ) : isAlertVisible ?
             <div>
-                <div className="overlay" onClick={closeAlert}></div>
+                <div className={`overlay`} onClick={closeAlert}></div>
                 <div className="popup">
                 <div className="popup-content">
                     <div className="alert-window">
@@ -199,7 +199,11 @@ function Clock() {
                 </div>
                 </div>
                 </div>
-            </div> : null}
+            </div> : !isInitialRender ?
+            <div>
+                <div className={`overlay-fade-out`}></div>
+            </div> 
+            : null}
     </div>
   );
 }
