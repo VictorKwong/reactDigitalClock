@@ -123,6 +123,22 @@ function Clock() {
         setSelectedMinute(parseInt(event.target.value, 10));
     };
 
+    const arrowHourChange = (action) => {
+        if (action === 'increment') {
+          setSelectedHour((selectedHour) => (selectedHour + 1) % 24);
+        } else if (action === 'decrement') {
+          setSelectedHour((selectedHour) => (selectedHour - 1 + 24) % 24);
+        }
+      };
+      
+      const arrowMinutesChange = (action) => {
+        if (action === 'increment') {
+          setSelectedMinute((selectedMinute) => (selectedMinute + 1) % 60);
+        } else if (action === 'decrement') {
+          setSelectedMinute((selectedMinute) => (selectedMinute - 1 + 60) % 60);
+        }
+      };
+
   return (
     <div>
         <div>
@@ -144,63 +160,77 @@ function Clock() {
         </div>
         { isAlarmSetting && !isAlertVisible ? (
                 <div>
-                    <div className={`overlay`} onClick={closeAlert}></div>
+                    <div className="overlay" onClick={displayAlarm}></div>
                     <div className="popup">
-                    <div className="popup-content">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Edit Alarm</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={displayAlarm}>
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
-                            <label>Select Hour: </label>
-                            <select value={selectedHour} onChange={handleHourChange} className='form-select'>
-                            {[...Array(24).keys()].map((hour) => (
-                                <option key={hour} value={hour} className='text-end'>
-                                {hour === 0 ? 'ㅤ12' : (hour <= 12 ? `ㅤ${hour}` : `ㅤ${hour - 12}`)} {hour < 12 ? 'AM' : 'PM'}
-                                </option>
-                            ))}
-                            </select>
-                            <label>Select Minute: </label>
-                            <select value={selectedMinute} onChange={handleMinuteChange} className='form-select'>
-                            {[...Array(60).keys()].map((minute) => (
-                                <option key={minute} value={minute} className='text-end'>
-                                {minute < 10 ? `0${minute}` : `${minute}`}
-                                </option>
-                            ))}
-                            </select>
-
-                            <button onClick={handleSetAlarm} className='btn btn-outline-success m-2'>Start</button>
-
-                                <div>
-                                <label>Select Audio:</label>
-                                    <select value={selectedAudio.id} onChange={handleAudioChange} className='form-select'>
-                                        {audioSources.map((audio) => (
-                                        <option key={audio.id} value={audio.id} className='text-center'>
-                                            {audio.name}
+                            <div>
+                                
+                                <label>Hours</label>
+                                
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <button className='btn btn-outline-secondary mx-1' onClick={() => arrowHourChange('decrement')}>&#60;</button>
+                                    <select value={selectedHour} onChange={handleHourChange} className='form-select'>
+                                    {[...Array(24).keys()].map((hour) => (
+                                        <option key={hour} value={hour}>
+                                        <span className='number-space equal-height'>
+                                            {hour === 0 ? '12' : (hour <= 12 ? `${hour}` : `${hour - 12}`)} {hour < 12 ? 'AM' : 'PM'}
+                                        </span>
                                         </option>
+                                    ))}
+                                    </select>
+                                    <button className='btn btn-outline-secondary mx-1' onClick={() => arrowHourChange('increment')}>&#62;</button>
+                                </div>
+
+                                
+                                
+                                <label>Minutes</label>
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <button className='btn btn-outline-secondary mx-1' onClick={() => arrowMinutesChange('decrement')}>&#60;</button>
+                                    <select value={selectedMinute} onChange={handleMinuteChange} className='form-select'>
+                                        {[...Array(60).keys()].map((minute) => (
+                                            <option key={minute} value={minute} className='text-left'>
+                                            {minute < 10 ? `0${minute}` : `${minute}`}
+                                            </option>
                                         ))}
                                     </select>
+                                    <button className='btn btn-outline-secondary mx-1' onClick={() => arrowMinutesChange('increment')}>&#62;</button>
                                 </div>
+                            </div>
+
+
+                            <div>
+                                <label>Sound</label>
+                                <select value={selectedAudio.id} onChange={handleAudioChange} className='form-select'>
+                                    {audioSources.map((audio) => (
+                                    <option key={audio.id} value={audio.id} className='text-left'>
+                                        {audio.name}
+                                    </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <button onClick={playAlarm} className='btn btn-outline-primary m-2'>Test</button>
+                            <button onClick={handleSetAlarm} className='btn btn-outline-success m-2'>Start</button>
                             <button onClick={displayAlarm} className='btn btn-outline-primary m-2'>Cancel</button>
                         </div>
                         </div>
                     </div>
-                    </div>
                 </div>
         ) : isAlertVisible ?
             <div>
-                <div className={`overlay`} onClick={closeAlert}></div>
+                <div className="overlay" onClick={closeAlert}></div>
                 <div className="popup">
-                <div className="popup-content">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Alarm</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={closeAlert}>
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -214,10 +244,9 @@ function Clock() {
                         </div>
                     </div>
                 </div>
-                </div>
             </div> : !isInitialRender ?
             <div>
-                <div className={`overlay-fade-out`}></div>
+                <div className="overlay-fade-out"></div>
             </div> 
             : null}
     </div>

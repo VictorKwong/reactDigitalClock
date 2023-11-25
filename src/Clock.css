@@ -24,28 +24,32 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-  
-.popup-content {
-  text-align: center;
+  border-radius: 0.3rem;
 }
 
-.close-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+
+.close {
   cursor: pointer;
-  background: none;
-  border: none;
   font-size: 16px;
   color: #000;
-  transition: color 0.3s;
+  transition: all 0.3s;
 }
 
-.close-btn:hover {
-  color: red;
+.close:hover {
+  background-color: red;
+  color: white;
+}
+
+.number-space {
+  font-size: 16px; 
+  font-weight: bold;
+  background-color: #eee;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: inline-block;
 }
 
 @keyframes fadeInOverlay {
