@@ -143,60 +143,76 @@ function Clock() {
             )}
         </div>
         { isAlarmSetting && !isAlertVisible ? (
-                <div>   
-                    <div className={`overlay`} onClick={displayAlarm}></div>
-                        <div className="popup">
-                            <div className="popup-content">
-                                <button onClick={displayAlarm} className="close-btn">X</button>
-                            
-                                <label>Select Hour: </label>
-                                <select value={selectedHour} onChange={handleHourChange} className='form-select'>
-                                {[...Array(24).keys()].map((hour) => (
-                                    <option key={hour} value={hour} className='text-end'>
-                                    {hour === 0 ? 'ㅤ12' : (hour <= 12 ? `ㅤ${hour}` : `ㅤ${hour - 12}`)} {hour < 12 ? 'AM' : 'PM'}
-                                    </option>
-                                ))}
-                                </select>
-                                <label>Select Minute: </label>
-                                <select value={selectedMinute} onChange={handleMinuteChange} className='form-select'>
-                                {[...Array(60).keys()].map((minute) => (
-                                    <option key={minute} value={minute} className='text-end'>
-                                    {minute < 10 ? `0${minute}` : `${minute}`}
-                                    </option>
-                                ))}
-                                </select>
+                <div>
+                    <div className={`overlay`} onClick={closeAlert}></div>
+                    <div className="popup">
+                    <div className="popup-content">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={displayAlarm}>
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <label>Select Hour: </label>
+                            <select value={selectedHour} onChange={handleHourChange} className='form-select'>
+                            {[...Array(24).keys()].map((hour) => (
+                                <option key={hour} value={hour} className='text-end'>
+                                {hour === 0 ? 'ㅤ12' : (hour <= 12 ? `ㅤ${hour}` : `ㅤ${hour - 12}`)} {hour < 12 ? 'AM' : 'PM'}
+                                </option>
+                            ))}
+                            </select>
+                            <label>Select Minute: </label>
+                            <select value={selectedMinute} onChange={handleMinuteChange} className='form-select'>
+                            {[...Array(60).keys()].map((minute) => (
+                                <option key={minute} value={minute} className='text-end'>
+                                {minute < 10 ? `0${minute}` : `${minute}`}
+                                </option>
+                            ))}
+                            </select>
 
-                                <button onClick={handleSetAlarm} className='btn btn-outline-success m-2'>Start</button>
-
-                                    <div>
-                                    <label>Select Audio:</label>
-                                        <select value={selectedAudio.id} onChange={handleAudioChange} className='form-select'>
-                                            {audioSources.map((audio) => (
-                                            <option key={audio.id} value={audio.id} className='text-center'>
-                                                {audio.name}
-                                            </option>
-                                            ))}
-                                        </select>
-                                    </div>
+                            <button onClick={handleSetAlarm} className='btn btn-outline-success m-2'>Start</button>
 
                                 <div>
-                                    <button onClick={playAlarm} className='btn btn-outline-primary m-2'>Test</button>
-                                    <button onClick={displayAlarm} className='btn btn-outline-primary m-2'>Cancel</button>
+                                <label>Select Audio:</label>
+                                    <select value={selectedAudio.id} onChange={handleAudioChange} className='form-select'>
+                                        {audioSources.map((audio) => (
+                                        <option key={audio.id} value={audio.id} className='text-center'>
+                                            {audio.name}
+                                        </option>
+                                        ))}
+                                    </select>
                                 </div>
-                            </div>
-
                         </div>
+                        <div className="modal-footer">
+                            <button onClick={playAlarm} className='btn btn-outline-primary m-2'>Test</button>
+                            <button onClick={displayAlarm} className='btn btn-outline-primary m-2'>Cancel</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
         ) : isAlertVisible ?
             <div>
                 <div className={`overlay`} onClick={closeAlert}></div>
                 <div className="popup">
                 <div className="popup-content">
-                    <div className="alert-window">
-                        <button onClick={closeAlert} className="close-btn">X</button>
-                        <p>Alarm is ringing!</p>
-                        <button onClick={closeAlert} className='btn btn-outline-danger'>OK</button>
-                </div>
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={closeAlert}>
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="alert-window">
+
+                                <p>Alarm is ringing!</p>
+                                <button onClick={closeAlert} className='btn btn-outline-danger'>OK</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 </div>
             </div> : !isInitialRender ?
