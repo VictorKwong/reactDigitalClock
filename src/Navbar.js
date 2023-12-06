@@ -7,10 +7,10 @@ function Navbar() {
             <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="#">GitHub</a>
+                <a class="nav-link" href="https://github.com/VictorKwong">GitHub</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Portfolio</a>
+                <a class="nav-link" href="victorkaiwong.com">Portfolio</a>
             </li>
             </ul>
         </div>
