@@ -2,6 +2,9 @@ import React from 'react';
 import Clock from './Clock';
 import Navbar from './Navbar';
 import './App.css'
+import Alarm from './App';
+import Timer from './Timer';
+
 
 function App() {
   return (

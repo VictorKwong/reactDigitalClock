@@ -1,3 +1,6 @@
+import Alarm from './App';
+import Timer from './Timer';
+
 function Navbar() {
   return (
     <div>
@@ -7,10 +10,16 @@ function Navbar() {
             <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
+                <a class="nav-link" href="#">Clock</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Timer</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="https://github.com/VictorKwong">GitHub</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="victorkaiwong.com">Portfolio</a>
+                <a class="nav-link" href="https://victorkaiwong.com">Portfolio</a>
             </li>
             </ul>
         </div>

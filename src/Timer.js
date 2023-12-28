@@ -154,7 +154,7 @@ function Clock() {
                 </div>
             ) : (
                 <div>
-                    <button onClick={displayAlarm} className='btn btn-outline-success'>Set  Alarm</button>
+                    <button onClick={displayAlarm} className='btn btn-outline-success'>Edit Timer</button>
                 </div>
             )}
         </div>
