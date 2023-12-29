@@ -1,7 +1,5 @@
-import Alarm from './App';
-import Timer from './Timer';
 
-function Navbar() {
+function navbar() {
   return (
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,4 +26,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default navbar;
